@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-curl -s https://dl.bintray.com/sbt/native-packages/sbt/ | \
-    grep 'href=' | \
-    awk -F'>' '{print $3}' | awk -F'<' '{print $1}' | sed -e 's/\///g' | \
-    sed -e 's/\n/ /g' | tr '\n' ' '
+curl -s https://api.github.com/repos/sbt/sbt/releases | \
+    grep -E '^\s{4}\"name\"\: \"(\d+\.\d+\.\d+.*)\",$' | \
+    sed -rn 's/^.*: "(.+)".*$/\1/p'
