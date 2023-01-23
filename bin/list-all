@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 
-curl -s https://api.github.com/repos/sbt/sbt/releases | \
-    grep -E '^\s{4}\"name\"\: \"(\d+\.\d+\.\d+.*)\",$' | \
-    sed -rn 's/^.*: "(.+)".*$/\1/p'
+curl -s https://api.github.com/repos/sbt/sbt/releases | jq -M -r '.[].name'
